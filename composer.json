@@ -1,0 +1,20 @@
+{
+    "name": "guissilveira/url-shortener-api",
+    "description": "URL Shortener API with Silex.",
+    "version": "1.0",
+    "keywords": ["url", "shortener", "api", "rest", "silex"],
+    "license": "MIT",
+    "type": "project",
+    "homepage" : "https://github.com/guissilveira",
+    "authors": [
+        {
+            "name": "Guilherme Silveira da Silva",
+            "email": "guissilveira@gmail.com",
+            "homepage": "http://github.com/guissilveira",
+            "role": "Web Developer"
+        }
+    ],
+    "require": {
+        "silex/silex": "~2.0"
+    }
+}
