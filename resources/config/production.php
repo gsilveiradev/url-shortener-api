@@ -10,6 +10,6 @@ $app['db.options'] = array(
     "user" => "urlshortener",
     "password" => "urlshortener",
     "dbname" => "urlshortener",
-    "host" => "localhost",
+    "host" => "postgres",
     "port" => 5432
 );
