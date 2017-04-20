@@ -7,7 +7,11 @@ namespace App\Entities;
  **/
 class User
 {
-    /** @Id @Column(type="integer") @GeneratedValue **/
+    /**
+     * @Id
+     * @Column(type="integer")
+     * @GeneratedValue(strategy="IDENTITY")
+     */
     protected $id;
 
     /** @Column(type="string", unique=TRUE) **/
