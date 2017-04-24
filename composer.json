@@ -20,7 +20,8 @@
         "doctrine/dbal": "~2.5",
         "nesbot/Carbon": "~1.21",
         "dflydev/doctrine-orm-service-provider": "^2.0",
-        "hashids/hashids": "^2.0"
+        "hashids/hashids": "^2.0",
+        "vlucas/phpdotenv": "^2.4"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*"

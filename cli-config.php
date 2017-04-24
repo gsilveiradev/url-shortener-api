@@ -6,7 +6,10 @@ define("ROOT_PATH", __DIR__);
 
 $app = new Silex\Application();
 
-require __DIR__ . '/resources/config/production.php';
+$dotenv = new Dotenv\Dotenv(ROOT_PATH, 'config.env');
+$dotenv->load();
+
+require __DIR__ . '/resources/config.php';
 require __DIR__ . '/src/app.php';
 
 return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($app['orm.em']);
