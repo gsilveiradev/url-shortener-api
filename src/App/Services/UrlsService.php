@@ -4,8 +4,8 @@ namespace App\Services;
 
 class UrlsService extends BaseService
 {
-	protected $table = "urls";
-	protected $usersTable = "users";
+    protected $table = 'urls';
+    protected $usersTable = 'users';
 
     public function getOneUser($username)
     {
@@ -17,14 +17,34 @@ class UrlsService extends BaseService
         return $this->db->fetchAssoc("SELECT * FROM {$this->table} WHERE id=?", [(int) $id]);
     }
 
-    function save($params)
+    public function getOneByHash($hash)
     {
-        $this->db->insert($this->table, $params);
-        return $this->db->lastInsertId("urls_id_seq");
+        return $this->db->fetchAssoc("SELECT * FROM {$this->table} WHERE hash=?", [$hash]);
     }
 
-    function update($id, $params)
+    public function getUrlsStats()
+    {
+        return $this->db->fetchAll("SELECT * FROM {$this->table} ORDER BY hits DESC LIMIT 10");
+    }
+
+    public function getUrlsStatsCount()
+    {
+        return $this->db->fetchAssoc("SELECT COUNT(id) AS url_count, SUM(hits) AS hits_sum FROM {$this->table}");
+    }
+
+    public function save($params)
+    {
+        $this->db->insert($this->table, $params);
+        return $this->db->lastInsertId('urls_id_seq');
+    }
+
+    public function update($id, $params)
     {
         return $this->db->update($this->table, $params, ['id' => $id]);
+    }
+
+    public function delete($id)
+    {
+        return $this->db->delete($this->table, array('id' => $id));
     }
 }

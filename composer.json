@@ -22,6 +22,9 @@
         "dflydev/doctrine-orm-service-provider": "^2.0",
         "hashids/hashids": "^2.0"
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "2.*"
+    },
     "autoload": {
         "psr-0": {
             "App": "src/"

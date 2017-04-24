@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,20 +12,29 @@ class UrlsController extends BaseController
 {
     protected $userService;
 
-    public function __construct($service)
+    public function __construct($app, $service)
     {
-        parent::__construct($service);
+        parent::__construct($app, $service);
     }
 
-    public function redirect($id)
+    public function redirect($hash)
     {
-        return new JsonResponse(array("Redirect to URL: {$id}"));
+        // Verify url
+        $url = $this->service->getOneByHash($hash);
+        if ($url === false) {
+            return new JsonResponse(false, Response::HTTP_NOT_FOUND);
+        }
+
+        // Increase hits
+        $this->service->update($url['id'], ['hits' => $url['hits']+1]);
+
+        return new RedirectResponse($url['url']);
     }
 
     public function store($id, Request $request)
     {
         $username = $id;
-        $url = $request->request->get("url");
+        $url = $request->request->get('url');
 
         // Verify params
         if (!$username || !$url) {
@@ -34,11 +44,11 @@ class UrlsController extends BaseController
         // Verify user
         $user = $this->service->getOneUser($username);
         if ($user === false) {
-            return new JsonResponse(false, Response::HTTP_CONFLICT);
+            return new JsonResponse(false, Response::HTTP_NOT_FOUND);
         }
 
         $urlId = $this->service->save([
-            'user_id' => $user["id"],
+            'user_id' => $user['id'],
             'hits' => 0,
             'url' => $url,
             'hash' => $url
@@ -50,25 +60,60 @@ class UrlsController extends BaseController
         $url = $this->service->getOne($urlId);
 
         return new JsonResponse([
-            "id" => $url['id'],
-            "hits" => $url['hits'],
-            "url" => $url['url'],
-            "shortUrl" => $url['hash']
+            'id' => $url['id'],
+            'hits' => $url['hits'],
+            'url' => $url['url'],
+            'shortUrl' => $this->app['api_url'].'urls/'.$url['hash']
         ], Response::HTTP_CREATED);
     }
 
     public function index()
     {
-        return new JsonResponse(array("Stats of all URLs."));
+        $topUrls = [];
+
+        $urls = $this->service->getUrlsStats();
+        foreach ($urls as $url) {
+            $topUrls[] = [
+                'id' => $url['id'],
+                'hits' => $url['hits'],
+                'url' => $url['url'],
+                'shortUrl' => $this->app['api_url'].'urls/'.$url['hash']
+            ];
+        }
+
+        $urlsCount = $this->service->getUrlsStatsCount();
+
+        return new JsonResponse([
+            'hits' => $urlsCount['hits_sum'] ? $urlsCount['hits_sum'] : 0,
+            'urlCount' => $urlsCount['url_count'] ? $urlsCount['url_count'] : 0,
+            'topUrls' => $topUrls
+        ]);
     }
 
     public function show($id)
     {
-        return new JsonResponse(array("Stats of one URL: {$id}"));
+        // Verify url
+        $url = $this->service->getOne($id);
+        if ($url === false) {
+            return new JsonResponse(false, Response::HTTP_NOT_FOUND);
+        }
+
+        return new JsonResponse([
+            'id' => $url['id'],
+            'hits' => $url['hits'],
+            'url' => $url['url'],
+            'shortUrl' => $this->app['api_url'].'urls/'.$url['hash']
+        ], Response::HTTP_OK);
     }
 
     public function delete($id)
     {
-        return new JsonResponse(array("Delete URL: {$id}"));
+        // Verify url
+        $url = $this->service->getOne($id);
+        if ($url === false) {
+            return new JsonResponse(false, Response::HTTP_NOT_FOUND);
+        }
+
+        return new JsonResponse($this->service->delete($url['id']));
     }
 }
