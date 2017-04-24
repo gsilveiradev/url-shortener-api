@@ -6,7 +6,7 @@ Welcome to my URL shortener api.
 
 I use [Docker](https://www.docker.com/products/docker) to administer this test.
 
-### Technology
+## Technology
 
 - PHP > 7.0.
 - NGINX web server
@@ -24,10 +24,9 @@ I use [Docker](https://www.docker.com/products/docker) to administer this test.
 
 2) Install and run by script (OR go to step 3)
 
-```
-sh install.sh
-sh run.sh
-```
+- Install: `sh install.sh`
+- Configure the ENV params into `config.env` file, primarily the `API_URL`
+- Run the starter: `sh start.sh`
 
 3) Follow these instructions (if you don't want to run the shell scripts above):
 
