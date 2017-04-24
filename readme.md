@@ -4,9 +4,9 @@ Welcome to my URL shortener api.
 
 ## Prerequsites
 
-I use [Docker](https://www.docker.com/products/docker) to administer this test.
+I use [Docker](https://www.docker.com) to administer this test.
 
-## Technology
+## Technology
 
 - PHP > 7.0.
 - NGINX web server
@@ -49,18 +49,18 @@ If you want to up all the containers except postgres, run: `docker-compose up -d
 
 | Method      | URL                 | Description            |
 | ---         | ---                 | ---                    |
-| GET         | `/urls/{hash}'      | Redirect short url     |
-| GET         | `/stats'            | Get stats of all urls  |
-| GET         | `/stats/{id}'       | Get stats of one url   |
-| DELETE      | `/urls/{id}'        | Delete one url         |
-| POST        | `/users/{id}/urls'  | Create one url by user |
-| GET         | `/users/{id}/stats' | Get stats of user urls |
-| POST        | `/users'            | Create an user         |
-| DELETE      | `/users/{id}'       | Delete an user         |
+| GET         | `/urls/{hash}`      | Redirect short url     |
+| GET         | `/stats`            | Get stats of all urls  |
+| GET         | `/stats/{id}`       | Get stats of one url   |
+| DELETE      | `/urls/{id}`        | Delete one url         |
+| POST        | `/users/{id}/urls`  | Create one url by user |
+| GET         | `/users/{id}/stats` | Get stats of user urls |
+| POST        | `/users`            | Create an user         |
+| DELETE      | `/users/{id}`       | Delete an user         |
 
 ---
 
-## Interesting
+## Interest stuff
 
 Check for PSR2 standard running:
 
