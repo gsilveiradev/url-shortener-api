@@ -65,8 +65,7 @@ If you want to up all the containers except postgres, run: `docker-compose up -d
 Check for PSR2 standard running:
 
 ```
-docker-compose exec workspace bash
-vendor/bin/phpcs resources src --standard=PSR2
+docker-compose exec workspace bash -c 'vendor/bin/phpcs resources src --standard=PSR2'
 ```
 
 Thank you!
