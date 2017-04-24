@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1337f8d332a1483dc8939e82a6bfc31c",
-    "content-hash": "5f78a82cdb6f925103d0cf4a1329fa22",
+    "hash": "5432127b5156f8a7d578c9538646bee1",
+    "content-hash": "0a467df3d966609e8d6ee2476edc0e98",
     "packages": [
         {
             "name": "dflydev/doctrine-orm-service-provider",
@@ -1685,6 +1685,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=7.0.0"
+    },
     "platform-dev": []
 }
