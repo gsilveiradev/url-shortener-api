@@ -15,13 +15,12 @@ class ServicesLoader
 
     public function bindServicesIntoContainer()
     {
-        $this->app['urls.service'] = function() {
-            return new Services\UrlsService($this->app["db"]);
+        $this->app['urls.service'] = function () {
+            return new Services\UrlsService($this->app['db']);
         };
 
-        $this->app['users.service'] = function() {
-            return new Services\UsersService($this->app["db"]);
+        $this->app['users.service'] = function () {
+            return new Services\UsersService($this->app['db']);
         };
     }
 }
-
