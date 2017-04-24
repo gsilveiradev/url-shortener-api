@@ -2,6 +2,9 @@ FROM laradock/php-fpm:7.0--1.2
 
 MAINTAINER Mahmoud Zalt <mahmoud@zalt.me>
 
+# Install the bcmath extension
+RUN docker-php-ext-install bcmath
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
