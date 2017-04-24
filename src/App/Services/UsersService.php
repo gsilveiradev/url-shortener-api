@@ -54,6 +54,7 @@ class UsersService extends BaseService
 
     public function delete($id)
     {
-        return $this->db->delete($this->table, array('id' => $id));
+        $this->db->delete($this->urlsTable, ['user_id' => $id]);
+        return $this->db->delete($this->table, ['id' => $id]);
     }
 }

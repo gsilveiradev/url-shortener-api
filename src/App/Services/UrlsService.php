@@ -45,6 +45,6 @@ class UrlsService extends BaseService
 
     public function delete($id)
     {
-        return $this->db->delete($this->table, array('id' => $id));
+        return $this->db->delete($this->table, ['id' => $id]);
     }
 }
